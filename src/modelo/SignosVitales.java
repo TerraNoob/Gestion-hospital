@@ -20,14 +20,18 @@ public class SignosVitales {
     public double getTemperatura(){ return temperatura; }
 
     public void setFrecuenciaCardiaca(int frecuenciaCardiaca){ 
-        this.frecuenciaCardiaca = frecuenciaCardiaca; }
+        this.frecuenciaCardiaca = frecuenciaCardiaca; 
+    }
 
     public void setPresionArterial(double presionArterial){ 
-        this.presionArterial = presionArterial; }
+        this.presionArterial = presionArterial; 
+    }
 
     public void setSaturacion(int saturacion){ 
-        this.saturacion = saturacion; }
+        this.saturacion = saturacion; 
+    }
 
     public void setTemperatura(double temperatura){ 
-        this.temperatura = temperatura; }
+        this.temperatura = temperatura; 
+    }
 }
