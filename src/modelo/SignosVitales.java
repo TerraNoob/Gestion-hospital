@@ -1,3 +1,5 @@
+package modelo;
+
 public class SignosVitales {
     private int frecuenciaCardiaca;
     private double presionArterial;
