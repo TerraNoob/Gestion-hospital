@@ -1,3 +1,5 @@
+package modelo;
+
 public class Cama{
     private int idCama;
     private int disponibilidad;
