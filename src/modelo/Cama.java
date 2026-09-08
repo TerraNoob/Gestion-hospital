@@ -32,4 +32,12 @@ public class Cama{
             this.disponibilidad = 0; 
         }
     }
+    public boolean isOcupada(){
+        return this.disponibilidad == 0;
+    }
+
+    public void desocuparCama(){
+        this.pacienteActual = null;
+        this.disponibilidad = 1;
+    }
 }
