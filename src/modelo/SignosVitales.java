@@ -1,3 +1,5 @@
+package modelo;
+
 public class SignosVitales{
     private int frecuenciaCardiaca;
     private double presionArterial;
@@ -12,22 +14,29 @@ public class SignosVitales{
     }
 
     public float calcularGravedad(){
+
         float gravedad = 0.0f;
 
-        // Considerado saturación bajo lo normal
+        // Considera saturación bajo lo normal
         if (this.saturacion < 95){
-            gravedad += 2.0f;
+            gravedad += 1.5f;
         }
 
-        // Considerado frecuencia cardíaca sobre y bajo lo normal
+        // Considera frecuencia cardíaca sobre y bajo lo normal
         if (this.frecuenciaCardiaca >= 100 || this.frecuenciaCardiaca < 50){
-            gravedad += 2.0f;
+            gravedad += 1.5f;
         }
 
-        // Considerado temperatura bajo y sobre lo normal
+        // Considera temperatura bajo y sobre lo normal
         if (this.temperatura >= 37.5 || this.temperatura < 35.5){
-            gravedad += 2.0f;
+            gravedad += 1.5f;
         }
+
+        // Considera presión arterial fuera de rango
+        if (this.presionArterial >= 140.0 || this.presionArterial < 90.0){
+            gravedad += 1.5f;
+        }
+
         return gravedad;
     }
 
