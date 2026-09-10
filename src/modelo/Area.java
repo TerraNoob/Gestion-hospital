@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Area{
 
-    private String codigo;
+    private int codigo;
     private String nombre;
     private int capacidadMaxima;
     private List<Cama> camas;
 
-    public Area(String codigo, String nombre, int capacidadMaxima){
+    public Area(int codigo, String nombre, int capacidadMaxima){
         this.codigo = codigo;
         this.nombre = nombre;
         this.capacidadMaxima = capacidadMaxima;
@@ -73,11 +73,11 @@ public class Area{
         return disponibles;
     }
 
-    public String getCodigo(){
+    public int getCodigo(){
         return codigo;
     }
 
-    public void setCodigo(String codigo){
+    public void setCodigo(int codigo){
         this.codigo = codigo;
     }
 
