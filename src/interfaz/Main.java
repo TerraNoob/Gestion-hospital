@@ -266,6 +266,7 @@ public class Main {
 	    	    	System.out.println("========== MENÚ ==========");
 	    	    	System.out.println("1. Listar Camas Disponibles");
 	    	    	System.out.println("2. Listar Pacientes Sin Asignar");
+	    	    	System.out.println("3. Asignar Cama A Paciente");
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
@@ -280,7 +281,10 @@ public class Main {
 	                    System.out.println("Listando Camas Disponibles");
 	                    listarPacientesSinAsignar(hospital, scanner);
 	                    break;
-
+	                case 3:
+	                    System.out.println("Asignando Cama");
+	                    asignarCama(hospital, scanner);
+	                    break;
 	                case 0:
 	                	System.out.println("Saliendo");
 	                	break;
