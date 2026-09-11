@@ -349,8 +349,62 @@ public class Main {
     	    }
     	}
        
-       public void buscarArea(Hospital hospital, Scanner scanner){
+       public static void buscarArea(Hospital hospital, Scanner scanner){
+    	   Area temp;
+    	   System.out.println("===== BUSCAR ÁREA =====");
+
+    	   System.out.print("Código del área: ");
+    	   int codigo = scanner.nextInt();
+    	   scanner.nextLine(); 
     	   
+    	   temp = hospital.buscarArea(codigo);
+    	   
+    	   if (temp != null) {
+    		   System.out.println("Código:" + temp.getCodigo());
+    		   System.out.println("Nombre:" + temp.getNombre());
+    		   System.out.println("Capacidad máxima:" + temp.getCapacidadMaxima());
+    		   System.out.println("Cantidad de camas actuales:" + temp.getCamas().size());
+    		   System.out.println("Desea ver la lista de camas?");
+    		   System.out.println("1. Si");
+    		   System.out.println("2. No");
+    		   
+    		   int opcion = scanner.nextInt();
+
+    		   if (opcion == 1) {
+    			   listarCamas(temp.getCamas());
+    		   } 
+    		   scanner.nextLine();
+
+    		   System.out.println("Modificar datos de área?");
+    		   System.out.println("1. Nombre");
+    		   System.out.println("2. Capacidad máxima");
+    		   System.out.println("0. Salir");
+
+    		   int opcionModificar = scanner.nextInt();
+    		   scanner.nextLine();
+
+    		   if (opcionModificar == 1) {
+
+    		       System.out.print("Ingrese el nuevo nombre: ");
+    		       String nuevoNombre = scanner.nextLine();
+
+    		       temp.setNombre(nuevoNombre);
+
+    		       System.out.println("Nombre modificado correctamente.");
+
+    		   } else if (opcionModificar == 2) {
+
+    		       System.out.print("Ingrese la nueva capacidad máxima: ");
+    		       int nuevaCapacidad = scanner.nextInt();
+
+    		       temp.setCapacidadMaxima(nuevaCapacidad);
+
+    		       System.out.println("Capacidad modificada correctamente.");
+    		   }
+        	   
+    	   } else {
+    		   System.out.println("No existe área de código" + codigo);
+    	   }
        }
        
        
