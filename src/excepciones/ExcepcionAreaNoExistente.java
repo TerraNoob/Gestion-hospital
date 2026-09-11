@@ -1,6 +1,6 @@
 package excepciones;
 
-public class ExcepcionAreaNoEncontrada extends Exception{
+public class ExcepcionAreaNoExistente extends Exception{
     public ExcepcionAreaNoEncontrada(String mensaje){
         super(mensaje);
     }
