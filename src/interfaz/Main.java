@@ -12,6 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		 Scanner scanner = new Scanner(System.in);
+		 Hospital hospital = new Hospital("Hospital SIA", "Valparaíso");
 		 int opcion;
 
 		//MENÚ PRINCIPAL
@@ -52,7 +53,7 @@ public class Main {
 	}  
 	        
        //MENÚ CONSOLA
-       public void menuConsola(Hospital hospital, Scanner scanner){
+       public static void menuConsola(Hospital hospital, Scanner scanner){
     	   
     	   int opcion;
 	    	    do {
@@ -75,9 +76,14 @@ public class Main {
 	                    System.out.println("Ingresando a menú camas");
 	                    menuCamas(hospital, scanner);
 	                    break;
-
+	                    
 	                case 3:
-	                    System.out.println("Saliendo a funciones especiales");
+	                    System.out.println("Ingresando a menú camas");
+	                    menuCamas(hospital, scanner);
+	                    break;
+	                    
+	                case 4:
+	                    System.out.println("Ingresando a funciones especiales");
 	                    menuFuncionesEspeciales(hospital, scanner);
 	                    break;
 	                    
@@ -97,7 +103,7 @@ public class Main {
        }
        
        //MENÚ ÁREAS
-       public void menuAreas(Hospital hospital, Scanner scanner){
+       public static void menuAreas(Hospital hospital, Scanner scanner){
     	   
     	   int opcion;
 	    	    do {
@@ -149,7 +155,7 @@ public class Main {
        
        
      //MENÚ CAMAS
-       public void menuCamas(Hospital hospital, Scanner scanner){
+       public static void menuCamas(Hospital hospital, Scanner scanner){
     	   
     	   int opcion;
 	    	    do {
@@ -200,7 +206,7 @@ public class Main {
        }
        
      //MENÚ PACIENTES
-       public void menuPäcientes(Hospital hospital, Scanner scanner){
+       public static void menuPäcientes(Hospital hospital, Scanner scanner){
     	   
     	   int opcion;
 	    	    do {
@@ -251,7 +257,7 @@ public class Main {
        }
 
        //FUNCIONES ESPECIALES
-       public void menuFuncionesEspeciales(Hospital hospital, Scanner scanner){
+       public static void menuFuncionesEspeciales(Hospital hospital, Scanner scanner){
     	   
     	   int opcion;
 	    	    do {
@@ -266,7 +272,7 @@ public class Main {
 	    	    	switch (opcion) {
 	                case 1:
 	                    System.out.println("Listando Camas Disponibles");
-	                    listarCamasDisponibles(hospital, scanner);
+	                    listarCamasDisponibles(hospital);
 	                    break;
 	                case 2:
 	                    System.out.println("Listando Camas Disponibles");
@@ -488,7 +494,7 @@ public class Main {
     	    System.out.println("No existe una cama con ese ID.");
        }
        
-       public void listarCamas(Hospital hospital, Scanner scanner){
+       public static void listarCamas(Hospital hospital, Scanner scanner){
     	   
    		    System.out.println("===== LISTAR CAMAS =====");
 
@@ -520,7 +526,7 @@ public class Main {
        }
    
        
-       public void buscarCama(Hospital hospital, Scanner scanner){
+       public static void buscarCama(Hospital hospital, Scanner scanner){
     	   
 
 
@@ -722,29 +728,167 @@ public class Main {
     	    }
     	}
        
-       public void buscarPaciente(Hospital hospital, Scanner scanner){
-    	   
-       }
+       public static void buscarPaciente(Hospital hospital, Scanner scanner) {
+
+    	    System.out.println("===== BUSCAR PACIENTE =====");
+    	    System.out.print("RUT del paciente: ");
+    	    String rutBuscar = scanner.nextLine();
+
+    	    // Pacientes sin asignar
+    	    for (int i = 0; i < hospital.getPacientesSinAsignar().size(); i++) {
+
+    	        Paciente paciente = hospital.getPacientesSinAsignar().get(i);
+
+    	        if (rutBuscar.equals(paciente.getRut())) {
+
+    	        	System.out.println("===== DATOS DEL PACIENTE =====");
+    	            System.out.println("Nombre: " + paciente.getNombre());
+    	            System.out.println("RUT: " + paciente.getRut());
+    	            System.out.println("Edad: " + paciente.getEdad());
+    	            System.out.println("Gravedad: " + paciente.getGravedad());
+
+    	            System.out.println("Estado: Sin cama asignada");
+    	            return;
+    	        }
+    	    }
+
+    	    // Pacientes asignados
+    	    ArrayList<Area> areas = hospital.listarAreas();
+
+    	    for (int i = 0; i < areas.size(); i++) {
+
+    	        Area area = areas.get(i);
+
+    	        for (int j = 0; j < area.getCamas().size(); j++) {
+
+    	            Cama cama = area.getCamas().get(j);
+
+    	            if (cama.getPacienteActual() != null &&
+    	                rutBuscar.equals(cama.getPacienteActual().getRut())) {
+
+    	                Paciente paciente = cama.getPacienteActual();
+
+    	                System.out.println("===== DATOS DEL PACIENTE =====");
+    	                System.out.println("Nombre: " + paciente.getNombre());
+    	                System.out.println("RUT: " + paciente.getRut());
+    	                System.out.println("Edad: " + paciente.getEdad());
+    	                System.out.println("Gravedad: " + paciente.getGravedad());
+
+    	                System.out.println("Estado: En cama");
+    	                System.out.println("Cama: " + cama.getIdCama());
+    	                System.out.println("Área: " + area.getNombre());
+
+    	                return;
+    	            }
+    	        }
+    	    }
+
+    	    System.out.println("No existe un paciente con RUT " + rutBuscar);
+    	}
        
        //FUNCIONES ESPECIALES
-       public void listarCamasDisponibles(Hospital hospital, Scanner scanner) {
-    	   
-       }
+       public static void listarCamasDisponibles(Hospital hospital) {
+
+    	    System.out.println("===== CAMAS DISPONIBLES =====");
+
+    	    ArrayList<Area> areas = hospital.listarAreas();
+    	    boolean hayDisponibles = false;
+
+    	    for (int i = 0; i < areas.size(); i++) {
+
+    	        Area area = areas.get(i);
+
+    	        for (int j = 0; j < area.getCamas().size(); j++) {
+
+    	            Cama cama = area.getCamas().get(j);
+
+    	            if (cama.getDisponibilidad() == 1) {
+
+    	                System.out.println("ID: " + cama.getIdCama());
+    	                System.out.println("Categoría: " + cama.getCategoriaCama());
+    	                System.out.println("Área: " + area.getNombre());
+    	                System.out.println("----------------------");
+
+    	                hayDisponibles = true;
+    	            }
+    	        }
+    	    }
+
+    	    if (!hayDisponibles) {
+    	        System.out.println("No hay camas disponibles.");
+    	    }
+    	}
        
-       
-       
-       public void listarPacientesSinAsignar(Hospital hospital, Scanner scanner) {
-    	   
+       public static void asignarCama(Hospital hospital, Scanner scanner) {
+
+    	   //Eliges paciente
+    	   System.out.println("===== ASIGNAR CAMA =====");
+    	   System.out.print("RUT del paciente: ");
+    	   String rut = scanner.nextLine();
+
+    	   Paciente paciente = null;
+
+    	    
     	   for (int i = 0; i < hospital.getPacientesSinAsignar().size(); i++) {
 
-    		    Paciente paciente = hospital.getPacientesSinAsignar().get(i);
+    	       Paciente temp = hospital.getPacientesSinAsignar().get(i);
 
-    		    System.out.println("Nombre: " + paciente.getNombre());
-    		    System.out.println("RUT: " + paciente.getRut());
-    		    System.out.println("Edad: " + paciente.getEdad());
-    		    System.out.println("Tipo: " + paciente.obtenerTipoAtencion());
+    	       if (rut.equals(temp.getRut())) {
+    	           paciente = temp;
+    	           break;
+    	       }
+    	   }
 
-    		    System.out.println("----------------------");
-    		}
+    	   if (paciente == null) {
+    	       System.out.println("No existe un paciente sin asignar con ese RUT.");
+    	       return;
+    	   }
+
+    	   //Eliges cama
+    	   listarCamasDisponibles(hospital);
+
+    	   System.out.print("ID de la cama: ");
+    	   int idCama = scanner.nextInt();
+    	   scanner.nextLine();
+
+    	   ArrayList<Area> areas = hospital.listarAreas();
+
+    	   for (int i = 0; i < areas.size(); i++) {
+
+    	       Area area = areas.get(i);
+    	       Cama cama = area.buscarCama(idCama);
+
+    	       if (cama != null) {
+
+    	           if (cama.getDisponibilidad() != 1) {
+    	               System.out.println("La cama no está disponible.");
+    	               return;
+    	           }
+
+    	           cama.ocuparCama(paciente);
+    	           paciente.setCamaActual(cama);
+
+    	           hospital.getPacientesSinAsignar().remove(paciente);
+
+    	           System.out.println("Paciente asignado correctamente.");
+    	           return;
+    	       }
+    	   }
+
+    	   System.out.println("No existe una cama con ese ID.");
+      }
+       
+      public static void listarPacientesSinAsignar(Hospital hospital, Scanner scanner) {
+    	  for (int i = 0; i < hospital.getPacientesSinAsignar().size(); i++) {
+
+    		 Paciente paciente = hospital.getPacientesSinAsignar().get(i);
+
+    		 System.out.println("Nombre: " + paciente.getNombre());
+    		 System.out.println("RUT: " + paciente.getRut());
+    		 System.out.println("Edad: " + paciente.getEdad());
+    		 System.out.println("Tipo: " + paciente.obtenerTipoAtencion());
+
+    		     System.out.println("----------------------");
+    		} 
        }
 }
