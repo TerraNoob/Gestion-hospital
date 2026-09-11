@@ -746,6 +746,13 @@ public class Main {
     	            System.out.println("RUT: " + paciente.getRut());
     	            System.out.println("Edad: " + paciente.getEdad());
     	            System.out.println("Gravedad: " + paciente.getGravedad());
+
+					if (paciente.getCamaActual() != null){
+						System.out.println("Estado: En cama " + paciente.getCamaActual().getIdCama());
+					}else{
+						System.out.println("Estado: Sin cama asignada");
+					}
+				
 					if (paciente.getSignos() != null){
             			System.out.println("--- Signos Vitales ---");
             			System.out.println("Frecuencia cardiaca: " + paciente.getSignos().getFrecuenciaCardiaca() + " lpm");
@@ -755,6 +762,29 @@ public class Main {
         			}
         			System.out.println("------------------------------------");
 
+					System.out.println("¿Desea actualizar/modificar los signos vitales del paciente?");
+					System.out.println("1. Si");
+					System.out.println("2. No");
+					System.out.print("seleccionar opcion: ");
+					int opcion = scanner.nextInt();
+					scanner.nextLine();
+					if (opcion == 1){
+						System.out.print("Nueva Frecuencia cardíaca: ");
+						int fc = scanner.nextInt();
+						System.out.print("Nueva Presión arterial: ");
+						double pa = scanner.nextDouble();
+						System.out.print("Nueva Saturación: ");
+						int sat = scanner.nextInt();
+						System.out.print("Nueva Temperatura: ");
+						double temp = scanner.nextDouble();
+						scanner.nextLine();
+						
+						SignosVitales nuevosSignos = new SignosVitales(fc, pa, sat, temp);
+						paciente.setSignos(nuevosSignos);
+						System.out.println("Signos vitales actualizads");
+						System.out.println("Nuevo indicador de gravedad es: " + paciente.getGravedad());
+					}
+				
     		}catch(ExcepcionPacienteNoEncontrado e){
         		System.out.println(e.getMessage());
     		}
