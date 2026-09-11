@@ -1,7 +1,5 @@
 package interfaz;
-import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.List;
 
 import modelo.Hospital;
 import modelo.*;
@@ -60,7 +58,8 @@ public class Main {
 	    	    	System.out.println("========== MENÚ ==========");
 	    	    	System.out.println("1. Gestionar Áreas");
 	    	    	System.out.println("2. Gestionar Camas");
-	    	    	System.out.println("3. Funciones especiales");
+	    	    	System.out.println("3. Gestionar Pacientes");
+	    	    	System.out.println("4. Funciones especiales");
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
@@ -78,8 +77,8 @@ public class Main {
 	                    break;
 	                    
 	                case 3:
-	                    System.out.println("Ingresando a menú camas");
-	                    menuCamas(hospital, scanner);
+	                    System.out.println("Ingresando a menú pacientes");
+	                    menuPacientes(hospital, scanner);
 	                    break;
 	                    
 	                case 4:
@@ -206,7 +205,7 @@ public class Main {
        }
        
      //MENÚ PACIENTES
-       public static void menuPäcientes(Hospital hospital, Scanner scanner){
+       public static void menuPacientes(Hospital hospital, Scanner scanner){
     	   
     	   int opcion;
 	    	    do {
@@ -264,6 +263,7 @@ public class Main {
 	    	    	System.out.println("========== MENÚ ==========");
 	    	    	System.out.println("1. Listar Camas Disponibles");
 	    	    	System.out.println("2. Listar Pacientes Sin Asignar");
+	    	    	System.out.println("2. Asignar Cama");
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
@@ -278,7 +278,10 @@ public class Main {
 	                    System.out.println("Listando Camas Disponibles");
 	                    listarPacientesSinAsignar(hospital);
 	                    break;
-
+	                case 3:
+	                    System.out.println("Asignando Cama");
+	                    asignarCama(hospital, scanner);
+	                    break;
 	                case 0:
 	                	System.out.println("Saliendo");
 	                	break;
