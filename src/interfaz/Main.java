@@ -78,6 +78,7 @@ public class Main {
 	                    System.out.println("Saliendo a funciones especiales");
 	                    menuFuncionesEspeciales();
 	                    break;
+	                    
 	                case 0:
 	                	System.out.println("Saliendo");
 	                	break;
@@ -111,22 +112,22 @@ public class Main {
 	    	    	switch (opcion) {
 	                case 1:
 	                    System.out.println("Agregar Area");
-	                    menuAreas();
+	                    agregarArea();
 	                    break;
 
 	                case 2:
 	                    System.out.println("Eliminar Area");
-	                    menuCamas();
+	                    eliminarArea();
 	                    break;
 
 	                case 3:
 	                    System.out.println("Listar Area");
-	                    menuFuncionesEspeciales();
+	                    listarAreas();
 	                    break;
 	                    
 	                case 4:
 	                    System.out.println("Buscar Area");
-	                    menuFuncionesEspeciales();
+	                    buscarArea();
 	                    break;
 	                    
 	                case 0:
@@ -163,22 +164,22 @@ public class Main {
 	    	    	switch (opcion) {
 	                case 1:
 	                    System.out.println("Agregar Cama");
-	                    menuAreas();
+	                    agregarCama();
 	                    break;
 
 	                case 2:
 	                    System.out.println("Eliminar Cama");
-	                    menuCamas();
+	                    eliminarCama();
 	                    break;
 
 	                case 3:
 	                    System.out.println("Listar Cama");
-	                    menuFuncionesEspeciales();
+	                    listarCamas();
 	                    break;
 	                    
 	                case 4:
 	                    System.out.println("Buscar Cama");
-	                    menuFuncionesEspeciales();
+	                    buscarCama();
 	                    break;
 	                    
 	                case 0:
@@ -214,22 +215,22 @@ public class Main {
 	    	    	switch (opcion) {
 	                case 1:
 	                    System.out.println("Agregar Paciente");
-	                    menuAreas();
+	                    agregarPaciente();
 	                    break;
 
 	                case 2:
 	                    System.out.println("Eliminar Paciente");
-	                    menuCamas();
+	                    eliminarPaciente();
 	                    break;
 
 	                case 3:
 	                    System.out.println("Listar Paciente");
-	                    menuFuncionesEspeciales();
+	                    listarPacientes();
 	                    break;
 	                    
 	                case 4:
 	                    System.out.println("Buscar Paciente");
-	                    menuFuncionesEspeciales();
+	                    buscarPaciente();
 	                    break;
 	                    
 	                case 0:
@@ -262,7 +263,7 @@ public class Main {
 	    	    	switch (opcion) {
 	                case 1:
 	                    System.out.println("Listando Camas Disponibles");
-	                    menuAreas();
+	                    listarCamasDisponibles();
 	                    break;
 
 	                case 0:
@@ -282,6 +283,64 @@ public class Main {
        
        
        //METODOS NECESARIOS PARA FUNCIONAMIENTO MAIN
+       //DENTRO DE LAS BUSQUEDAS SE PERMITIRÁN MODIFICAR 
+       //ATRIBUTOS
        
+       //FUNCIONES AREAS
+       public void agregarArea(){
+    	   
+       }
+       
+       public void eliminarArea(){
+    	   
+       }
+       
+       public void listarAreas(){
+    	   
+       }
+       
+       public void buscarArea(){
+    	   
+       }
+       
+       
+       //FUNCIONES CAMAS
+       public void agregarCama(){
+    	   
+       }
+       
+       public void eliminarCama(){
+    	   
+       }
+       
+       public void listarCamas(){
+    	   
+       }
+       
+       public void buscarCama(){
+    	   
+       }
+       
+       //FUNCIONES PACIENTES
+       public void agregarPaciente(){
+    	   
+       }
+       
+       public void eliminarPaciente(){
+    	   
+       }
+       
+       public void listarPacientes(){
+    	   
+       }
+       
+       public void buscarPaciente(){
+    	   
+       }
+       
+       //FUNCIONES ESPECIALES
+       public void listarCamasDisponibles() {
+    	   
+       }
        
 }
