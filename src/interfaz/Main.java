@@ -29,7 +29,7 @@ public class Main {
 	            switch (opcion) {
 	                case 1:
 	                    System.out.println("Ingresando por consola");
-	                    menuConsola();
+	                    menuConsola(hospital, scanner);
 	                    break;
 
 	                case 2:
@@ -73,12 +73,12 @@ public class Main {
 
 	                case 2:
 	                    System.out.println("Ingresando a menú camas");
-	                    menuCamas();
+	                    menuCamas(hospital, scanner);
 	                    break;
 
 	                case 3:
 	                    System.out.println("Saliendo a funciones especiales");
-	                    menuFuncionesEspeciales();
+	                    menuFuncionesEspeciales(hospital, scanner);
 	                    break;
 	                    
 	                case 0:
@@ -166,22 +166,22 @@ public class Main {
 	    	    	switch (opcion) {
 	                case 1:
 	                    System.out.println("Agregar Cama");
-	                    agregarCama();
+	                    agregarCama(hospital, scanner);
 	                    break;
 
 	                case 2:
 	                    System.out.println("Eliminar Cama");
-	                    eliminarCama();
+	                    eliminarCama(hospital, scanner);
 	                    break;
 
 	                case 3:
 	                    System.out.println("Listar Cama");
-	                    listarCamas();
+	                    listarCamas(hospital, scanner);
 	                    break;
 	                    
 	                case 4:
 	                    System.out.println("Buscar Cama");
-	                    buscarCama();
+	                    buscarCama(hospital, scanner);
 	                    break;
 	                    
 	                case 0:
@@ -257,6 +257,7 @@ public class Main {
 	    	    do {
 	    	    	System.out.println("========== MENÚ ==========");
 	    	    	System.out.println("1. Listar Camas Disponibles");
+	    	    	System.out.println("2. Listar Pacientes Sin Asignar");
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
@@ -265,7 +266,11 @@ public class Main {
 	    	    	switch (opcion) {
 	                case 1:
 	                    System.out.println("Listando Camas Disponibles");
-	                    listarCamasDisponibles();
+	                    listarCamasDisponibles(hospital, scanner);
+	                    break;
+	                case 2:
+	                    System.out.println("Listando Camas Disponibles");
+	                    listarPacientesSinAsignar(hospital, scanner);
 	                    break;
 
 	                case 0:
@@ -371,7 +376,17 @@ public class Main {
     		   int opcion = scanner.nextInt();
 
     		   if (opcion == 1) {
-    			   listarCamas(temp.getCamas());
+    			   
+    			   for (int i = 0; i < temp.getCamas().size();i++) {
+    				   System.out.println("ID:" + temp.getCamas().get(i).getIdCama());
+    				   System.out.println("Disponibilidad:" + temp.getCamas().get(i).getDisponibilidad());
+    				   System.out.println("Categoría:" + temp.getCamas().get(i).getCategoriaCama());
+    				   if (temp.getCamas().get(i).getPacienteActual() != null) {
+    					   System.out.println("Paciente:" + temp.getCamas().get(i).getPacienteActual());
+    				   } else {
+    					   System.out.println("Cama vacía");
+    				   }
+    			   }
     		   } 
     		   scanner.nextLine();
 
@@ -475,11 +490,84 @@ public class Main {
        
        public void listarCamas(Hospital hospital, Scanner scanner){
     	   
+   		    System.out.println("===== LISTAR CAMAS =====");
+
+   		    System.out.print("Código del área: ");
+   		    int codigo = scanner.nextInt();
+
+   		    Area area = hospital.buscarArea(codigo);
+   		    
+   		    if (area != null) {
+
+   		    	if (area.getCamas().isEmpty()) {
+   		    		System.out.println("Esta área no tiene camas registradas.");
+   		    		return;
+    		    }
+
+   		    	for (int i = 0; i < area.getCamas().size(); i++) {
+
+   		    		Cama cama = area.getCamas().get(i);
+
+   		    		System.out.println("ID: " + cama.getIdCama());
+   		    		System.out.println("Categoría: " + cama.getCategoriaCama());
+   		    		System.out.println("Disponibilidad: " + cama.getDisponibilidad());
+   		    		System.out.println("----------------------");
+    		    }
+
+    		} else {
+    			System.out.println("No existe un área con código " + codigo);
+    		}
        }
+   
        
        public void buscarCama(Hospital hospital, Scanner scanner){
     	   
+
+
+   		    System.out.println("===== BUSCAR CAMA =====");
+
+   		    System.out.print("ID de la cama: ");
+   		    int idCama = scanner.nextInt();
+   		    scanner.nextLine();
+
+    		ArrayList<Area> areas = hospital.listarAreas();
+
+    		for (int i = 0; i < areas.size(); i++) {
+
+    			Area area = areas.get(i);
+
+    			Cama temp = area.buscarCama(idCama);
+
+    			if (temp != null) {
+
+    				System.out.println("ID: " + temp.getIdCama());
+    				System.out.println("Categoría: " + temp.getCategoriaCama());
+    				System.out.println("Disponibilidad: " + temp.getDisponibilidad());
+
+    				System.out.println("¿Modificar datos de la cama?");
+    				System.out.println("1. Categoría");
+
+    				System.out.println("0. Salir");
+
+    				int opcion = scanner.nextInt();
+    				scanner.nextLine();
+
+    				if (opcion == 1) {
+
+    					System.out.print("Nueva categoría: ");
+    					String nuevaCategoria = scanner.nextLine();
+
+    					temp.setCategoriaCama(nuevaCategoria);
+
+    		        } 
+
+    		       	return;
+    		    }
+    	    }
+    		System.out.println("No existe una cama con ID " + idCama);
+    		
        }
+       
        
        //FUNCIONES PACIENTES
        public void agregarPaciente(Hospital hospital, Scanner scanner){
@@ -502,5 +590,7 @@ public class Main {
        public void listarCamasDisponibles(Hospital hospital, Scanner scanner) {
     	   
        }
-       
+       public void listarPacientesSinAsignar(Hospital hospital, Scanner scanner) {
+    	   
+       }
 }
