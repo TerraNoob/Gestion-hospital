@@ -1,5 +1,7 @@
 package interfaz;
-
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import modelo.Hospital;
 import modelo.*;
@@ -112,22 +114,22 @@ public class Main {
 	    	    	switch (opcion) {
 	                case 1:
 	                    System.out.println("Agregar Area");
-	                    agregarArea();
+	                    agregarArea(hospital, scanner);
 	                    break;
 
 	                case 2:
 	                    System.out.println("Eliminar Area");
-	                    eliminarArea();
+	                    eliminarArea(hospital, scanner);
 	                    break;
 
 	                case 3:
 	                    System.out.println("Listar Area");
-	                    listarAreas();
+	                    listarAreas(hospital);
 	                    break;
 	                    
 	                case 4:
 	                    System.out.println("Buscar Area");
-	                    buscarArea();
+	                    buscarArea(hospital, scanner);
 	                    break;
 	                    
 	                case 0:
@@ -287,59 +289,107 @@ public class Main {
        //ATRIBUTOS
        
        //FUNCIONES AREAS
-       public void agregarArea(){
+       public static void agregarArea(Hospital hospital, Scanner scanner){
+    	   System.out.println("===== AGREGAR ÁREA =====");
+
+    	   System.out.print("Código del área: ");
+    	   int codigo = scanner.nextInt();
+    	   scanner.nextLine(); 
+
+    	   System.out.print("Nombre del área: ");
+    	   String nombre = scanner.nextLine();
+
+    	   System.out.print("Capacidad máxima: ");
+    	   int capacidad = scanner.nextInt();
+
+    	   Area nuevaArea = new Area(codigo, nombre, capacidad);
     	   
+    	   if (hospital.agregarArea(nuevaArea)) {
+    	        System.out.println("Área agregada correctamente");
+    	    } else {
+    	        System.out.println("Error: ya existe un área con ese código");
+    	    }
+
+    	   System.out.println("Área agregada correctamente.");
+    	
        }
        
-       public void eliminarArea(){
+       public static void eliminarArea(Hospital hospital, Scanner scanner){
+    	   System.out.println("===== ELIMINAR ÁREA =====");
     	   
+    	   System.out.print("Código del área: ");
+    	   int codigo = scanner.nextInt();
+    	   scanner.nextLine(); 
+    	   
+    	   if (hospital.eliminarArea(codigo)) {
+    		   System.out.println("Área eliminada correctamente");
+    	   } else {
+    		   System.out.println("Error: no existe un área con ese código");
+    	   }
        }
        
-       public void listarAreas(){
-    	   
-       }
+       public static void listarAreas(Hospital hospital) {
+
+    	    ArrayList<Area> areas = hospital.listarAreas();
+
+    	    if (areas.isEmpty()) {
+    	        System.out.println("No hay áreas registradas.");
+    	        return;
+    	    }
+
+    	    System.out.println("===== ÁREAS DEL HOSPITAL =====");
+
+    	    for (int i = 0; i < areas.size(); i++) {
+    	    	Area area = areas.get(i);
+    	    	
+    	        System.out.println("Código: " + area.getCodigo());
+    	        System.out.println("Nombre: " + area.getNombre());
+    	        System.out.println("Capacidad máxima: " + area.getCapacidadMaxima());
+    	        System.out.println("------------------------------");
+    	    }
+    	}
        
-       public void buscarArea(){
+       public void buscarArea(Hospital hospital, Scanner scanner){
     	   
        }
        
        
        //FUNCIONES CAMAS
-       public void agregarCama(){
+       public void agregarCama(Hospital hospital, Scanner scanner){
     	   
        }
        
-       public void eliminarCama(){
+       public void eliminarCama(Hospital hospital, Scanner scanner){
     	   
        }
        
-       public void listarCamas(){
+       public void listarCamas(Hospital hospital, Scanner scanner){
     	   
        }
        
-       public void buscarCama(){
+       public void buscarCama(Hospital hospital, Scanner scanner){
     	   
        }
        
        //FUNCIONES PACIENTES
-       public void agregarPaciente(){
+       public void agregarPaciente(Hospital hospital, Scanner scanner){
     	   
        }
        
-       public void eliminarPaciente(){
+       public void eliminarPaciente(Hospital hospital, Scanner scanner){
     	   
        }
        
-       public void listarPacientes(){
+       public void listarPacientes(Hospital hospital, Scanner scanner){
     	   
        }
        
-       public void buscarPaciente(){
+       public void buscarPaciente(Hospital hospital, Scanner scanner){
     	   
        }
        
        //FUNCIONES ESPECIALES
-       public void listarCamasDisponibles() {
+       public void listarCamasDisponibles(Hospital hospital, Scanner scanner) {
     	   
        }
        
