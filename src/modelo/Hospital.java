@@ -6,11 +6,13 @@ public class Hospital {
 	private HashMap<Integer, Area> areas;
 	private String nombre;
 	private String direccion;
+	private ArrayList<Paciente> pacientesSinAsignar;
 	
 	public Hospital(String n, String d) {
 		this.nombre = n;
         this.direccion = d;
         this.areas = new HashMap<>();
+        this.pacientesSinAsignar = new ArrayList<>();
 	}
 	
 	public void setAreas(HashMap<Integer, Area> areas) {
@@ -31,7 +33,9 @@ public class Hospital {
 	public String getDireccion() {
 		return this.direccion;
 	}
-	
+	public ArrayList<Paciente> getPacientesSinAsignar(){
+		return pacientesSinAsignar;
+	}
 	public boolean agregarArea(Area area) {
 	    if (areas.containsKey(area.getCodigo())) {
 	        return false;
