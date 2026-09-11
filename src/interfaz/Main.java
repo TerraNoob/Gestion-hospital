@@ -68,7 +68,7 @@ public class Main {
 	    	    	switch (opcion) {
 	                case 1:
 	                    System.out.println("Ingresando a menú áreas");
-	                    menuAreas();
+	                    menuAreas(hospital, scanner);
 	                    break;
 
 	                case 2:
@@ -409,12 +409,68 @@ public class Main {
        
        
        //FUNCIONES CAMAS
-       public void agregarCama(Hospital hospital, Scanner scanner){
-    	   
-       }
+       public static void agregarCama(Hospital hospital, Scanner scanner) {
+
+    	    System.out.println("===== AGREGAR CAMA =====");
+
+    	    System.out.print("Código del área para añadir la cama: ");
+    	    int codigo = scanner.nextInt();
+    	    scanner.nextLine();
+
+    	    Area temp = hospital.buscarArea(codigo);
+
+    	    if (temp != null) {
+
+    	        System.out.print("ID de la cama: ");
+    	        int idCama = scanner.nextInt();
+    	        scanner.nextLine();
+
+    	        System.out.print("Categoría de la cama: ");
+    	        String categoria = scanner.nextLine();
+
+    	        Cama nuevaCama = new Cama(idCama, categoria);
+
+    	        if (temp.agregarCama(nuevaCama)) {
+    	            System.out.println("Cama agregada correctamente.");
+    	        } else {
+    	            System.out.println("No se pudo agregar la cama.");
+    	        }
+
+    	    } else {
+    	        System.out.println("No existe un área con código " + codigo);
+    	    }
+    	}
        
-       public void eliminarCama(Hospital hospital, Scanner scanner){
-    	   
+       public static void eliminarCama(Hospital hospital, Scanner scanner) {
+
+    	    System.out.println("===== ELIMINAR CAMA =====");
+    	    System.out.print("ID de la cama: ");
+
+    	    int idCama = scanner.nextInt();
+
+    	    ArrayList<Area> areas = hospital.listarAreas();
+
+    	    for (int i = 0; i < areas.size(); i++) {
+
+    	        Area area = areas.get(i);
+
+    	        Cama cama = area.buscarCama(idCama);
+
+    	        if (cama != null) {
+
+    	            if (area.eliminarCama(idCama)) {
+    	                System.out.println("Cama eliminada correctamente.");
+    	            } else {
+    	                System.out.println("No se puede eliminar una cama ocupada.");
+    	            }
+
+    	            return;
+    	        }
+    	    }
+
+    	    System.out.println("No existe una cama con ese ID.");
+
+    	    System.out.println("No existe una cama con ese ID.");
        }
        
        public void listarCamas(Hospital hospital, Scanner scanner){
