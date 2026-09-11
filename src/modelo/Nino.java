@@ -1,11 +1,11 @@
 package modelo;
 
-public class Niño extends Paciente {
+public class Nino extends Paciente {
 	
 	private String nombreApoderado;
 	private String rutApoderado;
 	
-	public Niño(String nombre, String rut, int edad, Cama camaActual, String na, String ra) {
+	public Nino(String nombre, String rut, int edad, Cama camaActual, String na, String ra) {
 		super(nombre, rut, edad, camaActual);
 		this.nombreApoderado = na;
 		this.rutApoderado = ra;
