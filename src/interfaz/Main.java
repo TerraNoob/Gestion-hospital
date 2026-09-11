@@ -469,6 +469,7 @@ public class Main {
     	    System.out.print("ID de la cama: ");
 
     	    int idCama = scanner.nextInt();
+		    scanner.nextLine();
 
     	    ArrayList<Area> areas = hospital.listarAreas();
 
@@ -691,6 +692,7 @@ public class Main {
     	        System.out.println("Nombre: " + paciente.getNombre());
     	        System.out.println("Rut: " + paciente.getRut());
     	        System.out.println("Edad: " + paciente.getEdad());
+				System.out.println("Tipo de atención: " + paciente.obtenerTipoAtencion());
     	        System.out.println("Gravedad: " + paciente.getGravedad());
     	        System.out.println("Estado: Sin cama");
     	        System.out.println("-------------------------");
@@ -716,6 +718,7 @@ public class Main {
     	                System.out.println("Nombre: " + paciente.getNombre());
     	                System.out.println("RUT: " + paciente.getRut());
     	                System.out.println("Edad: " + paciente.getEdad());
+						System.out.println("Tipo de atención: " + paciente.obtenerTipoAtencion());
     	                System.out.println("Gravedad: " + paciente.getGravedad());
     	                System.out.println("Estado: En cama " + cama.getIdCama());
     	                System.out.println("Área: " + area.getNombre());
@@ -881,7 +884,14 @@ public class Main {
     	   System.out.println("No existe una cama con ese ID.");
       }
        
-      public static void listarPacientesSinAsignar(Hospital hospital, Scanner scanner) {
+      public static void listarPacientesSinAsignar(Hospital hospital, Scanner scanner){
+
+		  if (hospital.getPacientesSinAsignar().isEmpty()){
+			  System.out.println("No hay pacientes en espera");
+			  return;
+		  } 
+		
+		  System.out.println("===== PACIENTES EN LISTA DE ESPERA =====");
     	  for (int i = 0; i < hospital.getPacientesSinAsignar().size(); i++) {
 
     		 Paciente paciente = hospital.getPacientesSinAsignar().get(i);
