@@ -47,11 +47,11 @@ public class Hospital {
 	
 	public boolean eliminarArea(int id) {
 	    if (areas.containsKey(id)) {
-	    	areas.remove(id);
-	    	return true;
-	    } else {
-	    	return false;
+	        areas.remove(id);
+	        return true;
 	    }
+
+	    return false;
 	}
 	
 	public Area buscarArea(int id) {

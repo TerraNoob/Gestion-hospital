@@ -276,7 +276,7 @@ public class Main {
 	                    break;
 	                case 2:
 	                    System.out.println("Listando Camas Disponibles");
-	                    listarPacientesSinAsignar(hospital, scanner);
+	                    listarPacientesSinAsignar(hospital);
 	                    break;
 
 	                case 0:
@@ -320,8 +320,6 @@ public class Main {
     	    } else {
     	        System.out.println("Error: ya existe un área con ese código");
     	    }
-
-    	   System.out.println("Área agregada correctamente.");
     	
        }
        
@@ -388,7 +386,7 @@ public class Main {
     				   System.out.println("Disponibilidad:" + temp.getCamas().get(i).getDisponibilidad());
     				   System.out.println("Categoría:" + temp.getCamas().get(i).getCategoriaCama());
     				   if (temp.getCamas().get(i).getPacienteActual() != null) {
-    					   System.out.println("Paciente:" + temp.getCamas().get(i).getPacienteActual());
+    					   System.out.println("Paciente:" + temp.getCamas().get(i).getPacienteActual().getNombre());
     				   } else {
     					   System.out.println("Cama vacía");
     				   }
@@ -878,7 +876,7 @@ public class Main {
     	   System.out.println("No existe una cama con ese ID.");
       }
        
-      public static void listarPacientesSinAsignar(Hospital hospital, Scanner scanner) {
+      public static void listarPacientesSinAsignar(Hospital hospital) {
     	  for (int i = 0; i < hospital.getPacientesSinAsignar().size(); i++) {
 
     		 Paciente paciente = hospital.getPacientesSinAsignar().get(i);
