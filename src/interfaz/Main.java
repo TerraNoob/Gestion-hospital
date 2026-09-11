@@ -6,7 +6,7 @@ import java.util.List;
 import modelo.Hospital;
 import modelo.*;
 import java.util.Scanner;
-import excepciones.*
+import excepciones.*;
 
 public class Main {
 	
@@ -335,7 +335,7 @@ public class Main {
 			   hospital.eliminarArea(codigo);
     		   System.out.println("Área eliminada correctamente");
     	   }catch(ExcepcionAreaNoExistente e){
-    		   System.out.println(e.getMessage();
+    		   System.out.println(e.getMessage());
     	   }
        }
        
@@ -746,7 +746,7 @@ public class Main {
     	            System.out.println("RUT: " + paciente.getRut());
     	            System.out.println("Edad: " + paciente.getEdad());
     	            System.out.println("Gravedad: " + paciente.getGravedad());
-					if (p.getSignos() != null){
+					if (paciente.getSignos() != null){
             			System.out.println("--- Signos Vitales ---");
             			System.out.println("Frecuencia cardiaca: " + paciente.getSignos().getFrecuenciaCardiaca() + " lpm");
             			System.out.println("Presion Arterial: " + paciente.getSignos().getPresionArterial() + " mmHg");
