@@ -63,22 +63,22 @@ public class Hospital {
 	}
 	
 
-	public ArrayList<Area> buscarArea(String nombre){
+	public ArrayList<Area> buscarArea(String nombre)throws ExcepcionAreaNoExistente{
     	ArrayList<Area> resultado = new ArrayList<>();
     	ArrayList<Area> lista = listarAreas();
 
-    	if (nombre == null){
-        	return resultado;
-    	}
-
-    	for (int i = 0; i < lista.size(); i++) {
-        	Area area = lista.get(i);
-        	if (area.getNombre() != null && area.getNombre().toLowerCase().equals(nombre.toLowerCase())){
-            	resultado.add(area);
-        	}
-    	}
-
-    	return resultado;
+    	if (nombre != null){
+			for (int i = 0; i < lista.size(); i++){
+				Area area = lista.get(i);
+				if(area.getNombre() != null && area.getNombre().equalsIgnoreCase(nombre)){
+					resultado.add(area);
+				}
+			}
+		}
+		if(resultado.isEmpty()){
+			throw new ExcepcionAreaNoExistente("no existe con el nombre: " + nombre);
+		}
+		return resultado;
 	}
 	
 
