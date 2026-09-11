@@ -6,6 +6,7 @@ import java.util.List;
 import modelo.Hospital;
 import modelo.*;
 import java.util.Scanner;
+import excepciones.*
 
 public class Main {
 	
@@ -330,10 +331,11 @@ public class Main {
     	   int codigo = scanner.nextInt();
     	   scanner.nextLine(); 
     	   
-    	   if (hospital.eliminarArea(codigo)) {
+    	   try{
+			   hospital.eliminarArea(codigo);
     		   System.out.println("Área eliminada correctamente");
-    	   } else {
-    		   System.out.println("Error: no existe un área con ese código");
+    	   }catch(ExcepcionAreaNoExistente e){
+    		   System.out.println(e.getMessage();
     	   }
        }
        
@@ -359,16 +361,14 @@ public class Main {
     	}
        
        public static void buscarArea(Hospital hospital, Scanner scanner){
-    	   Area temp;
     	   System.out.println("===== BUSCAR ÁREA =====");
-
     	   System.out.print("Código del área: ");
     	   int codigo = scanner.nextInt();
     	   scanner.nextLine(); 
-    	   
-    	   temp = hospital.buscarArea(codigo);
-    	   
-    	   if (temp != null) {
+
+		   try{
+			   Area temp = hospital.buscarArea(codigo);
+			   
     		   System.out.println("Código:" + temp.getCodigo());
     		   System.out.println("Nombre:" + temp.getNombre());
     		   System.out.println("Capacidad máxima:" + temp.getCapacidadMaxima());
@@ -378,6 +378,7 @@ public class Main {
     		   System.out.println("2. No");
     		   
     		   int opcion = scanner.nextInt();
+			   scanner.nextLine();
 
     		   if (opcion == 1){
     				for (int i = 0; i < temp.getCamas().size(); i++){
@@ -394,7 +395,6 @@ public class Main {
         				}
     				}
     		   } 
-    		   scanner.nextLine();
 
     		   System.out.println("Modificar datos de área?");
     		   System.out.println("1. Nombre");
@@ -418,13 +418,15 @@ public class Main {
     		       System.out.print("Ingrese la nueva capacidad máxima: ");
     		       int nuevaCapacidad = scanner.nextInt();
 
+				   scanner.nextLine();
+
     		       temp.setCapacidadMaxima(nuevaCapacidad);
 
     		       System.out.println("Capacidad modificada correctamente.");
     		   }
         	   
-    	   } else {
-    		   System.out.println("No existe área de código" + codigo);
+    	   } catch (ExcepcionAreaNoExistente e) {
+    		   System.out.println(e.getMessage());
     	   }
        }
        
@@ -438,9 +440,8 @@ public class Main {
     	    int codigo = scanner.nextInt();
     	    scanner.nextLine();
 
-    	    Area temp = hospital.buscarArea(codigo);
-
-    	    if (temp != null) {
+    	    try{
+				Area temp = hospital.buscarArea(codigo);
 
     	        System.out.print("ID de la cama: ");
     	        int idCama = scanner.nextInt();
@@ -457,8 +458,8 @@ public class Main {
     	            System.out.println("No se pudo agregar la cama.");
     	        }
 
-    	    } else {
-    	        System.out.println("No existe un área con código " + codigo);
+    	    } catch(ExcepcionAreaNoExistente e){
+    	        System.out.println(e.getMessage());
     	    }
     	}
        
@@ -497,10 +498,9 @@ public class Main {
 
    		    System.out.print("Código del área: ");
    		    int codigo = scanner.nextInt();
-
-   		    Area area = hospital.buscarArea(codigo);
    		    
-   		    if (area != null) {
+   		    try{
+				Area area = hospital.buscarArea(codigo);
 
    		    	if (area.getCamas().isEmpty()) {
    		    		System.out.println("Esta área no tiene camas registradas.");
@@ -517,8 +517,8 @@ public class Main {
    		    		System.out.println("----------------------");
     		    }
 
-    		} else {
-    			System.out.println("No existe un área con código " + codigo);
+    		}catch(ExcepcionAreaNoExistente e){
+    			System.out.println(e.getMessage());
     		}
        }
    
