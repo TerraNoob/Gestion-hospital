@@ -96,8 +96,33 @@ public class Hospital {
 	    pacientesSinAsignar.add(paciente);
 	    return true;
 	}
-	
-	
-	
-	 
+
+	public Paciente buscarPaciente(String rut) throws ExcepcionPacienteNoEncontrado {
+		if (rut == null || rut.isEmpty()){
+			throw new ExcepcionPacienteNoEncontrado("El RUT ingresado no es válido.");
+		}
+		// cicnlo para hacer la búsqueda en pacientes a espera de atención
+		for (int i = 0; i < pacientesSinAsignar.size(); i++) {
+			Paciente p = pacientesSinAsignar.get(i);
+			if (p.getRut() != null && p.getRut().toLowerCase().equals(rut.toLowerCase())) {
+				return p;
+			}
+		}
+
+		// búsqueda en cada cama de cada área
+		ArrayList<Area> listaAreas = listarAreas();
+		for (int i = 0; i < listaAreas.size(); i++){
+			Area area = listaAreas.get(i);
+			for (int j = 0; j < area.getCamas().size(); j++){
+				Cama cama = area.getCamas().get(j);
+				if (cama.getPacienteActual() != null){
+					Paciente p = cama.getPacienteActual();
+					if (p.getRut() != null && p.getRut().toLowerCase().equals(rut.toLowerCase())){
+						return p;
+					}
+				}
+			}
+		}
+		throw new ExcepcionPacienteNoEncontrado("No se encontró ningún paciente con el RUT: " + rut);
+	}
 }
