@@ -66,6 +66,9 @@ public class Paciente {
     public void setCamaActual(Cama camaActual){
         this.camaActual = camaActual;
     }
+    public String obtenerTipoAtencion() {
+        return "Atención general";
+    }
 
 }
 

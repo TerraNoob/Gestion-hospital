@@ -72,6 +72,18 @@ public class Area{
         }
         return disponibles;
     }
+    
+    public List<Cama> getCamasNoDisponibles(){
+        List<Cama> disponibles = new ArrayList<>();
+
+        for (int i = 0; i < this.camas.size(); i++){
+            Cama c = this.camas.get(i);
+            if (c.isOcupada()){
+                disponibles.add(c);
+            }
+        }
+        return disponibles;
+    }
 
     public int getCodigo(){
         return codigo;
