@@ -32,12 +32,24 @@ public class Hospital {
 		return this.direccion;
 	}
 	
-	public void agregarArea(Area area) {
+	public boolean agregarArea(Area area) {
+	    if (areas.containsKey(area.getCodigo())) {
+	        return false;
+	    }
+
 	    areas.put(area.getCodigo(), area);
+	    return true;
 	}
-	public void eliminarArea(int id) {
-	    areas.remove(id);
+	
+	public boolean eliminarArea(int id) {
+	    if (areas.containsKey(id)) {
+	    	areas.remove(id);
+	    	return true;
+	    } else {
+	    	return false;
+	    }
 	}
+	
 	public Area buscarArea(int id) {
 	    return areas.get(id);
 	}
