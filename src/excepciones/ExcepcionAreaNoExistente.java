@@ -1,7 +1,7 @@
 package excepciones;
 
 public class ExcepcionAreaNoExistente extends Exception{
-    public ExcepcionAreaNoEncontrada(String mensaje){
+    public ExcepcionAreaNoExistente(String mensaje){
         super(mensaje);
     }
 }
