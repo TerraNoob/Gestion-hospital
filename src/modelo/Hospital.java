@@ -1,6 +1,7 @@
 package modelo;
 import java.util.HashMap;
 import java.util.ArrayList;
+import excepciones.*;
 
 public class Hospital {
 	private HashMap<Integer, Area> areas;
@@ -54,8 +55,12 @@ public class Hospital {
 	    }
 	}
 	
-	public Area buscarArea(int id) {
-	    return areas.get(id);
+	public Area buscarArea(int id) throw ExcepcionAreaNoExistente{
+		Area area = areas.get(id);
+		if (area == null){
+			throw new ExcepcionAreaNoExistente("El área con código " + id + " no existe");
+		}
+	    return area;
 	}
 	
 
