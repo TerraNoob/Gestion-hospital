@@ -46,16 +46,15 @@ public class Hospital {
 	    return true;
 	}
 	
-	public boolean eliminarArea(int id) {
-	    if (areas.containsKey(id)) {
-	    	areas.remove(id);
-	    	return true;
-	    } else {
-	    	return false;
+	public boolean eliminarArea(int id) throws ExcepcionAreaNoExistente{
+	    if (!areas.containsKey(id)){
+	    	throw new ExcepcionAreaNoExistente("No se puede eliminar: el área con código " + id + " no existe");
 	    }
+		areas.remove(id);
+    	return true;
 	}
 	
-	public Area buscarArea(int id) throw ExcepcionAreaNoExistente{
+	public Area buscarArea(int id) throws ExcepcionAreaNoExistente{
 		Area area = areas.get(id);
 		if (area == null){
 			throw new ExcepcionAreaNoExistente("El área con código " + id + " no existe");
