@@ -612,35 +612,75 @@ public class Main {
     		}
        }
    
-       
-       public static void buscarCama(Hospital hospital, Scanner scanner) {
+	  public static void buscarCama(Hospital hospital, Scanner scanner) {
+			System.out.println("===== BUSCAR CAMA =====");
+			System.out.println("1. Buscar por ID de cama (int)");
+			System.out.println("2. Buscar por RUT de paciente internado (String)");
+			System.out.print("Seleccione una opcion: ");
+			int tipo = scanner.nextInt();
+			scanner.nextLine();
 
-    	    System.out.println("===== BUSCAR CAMA =====");
+			ArrayList<Area> areas = hospital.listarAreas();
+			Cama temp = null;
+			Area areaEncontrada = null;
 
-    	    System.out.print("ID de la cama: ");
-    	    int idCama = scanner.nextInt();
-    	    scanner.nextLine();
+			if (tipo == 1) {
+				System.out.print("ID de la cama: ");
+				int idCama = scanner.nextInt();
+				scanner.nextLine();
 
-    	    ArrayList<Area> areas = hospital.listarAreas();
+				// SIA-5: Uso de sobrecarga buscarCama(int)
+				for (int i = 0; i < areas.size(); i++) {
+					Area area = areas.get(i);
+					temp = area.buscarCama(idCama);
+					if (temp != null) {
+						areaEncontrada = area;
+						break;
+					}
+				}
 
-    	    for (int i = 0; i < areas.size(); i++) {
+			} else if (tipo == 2) {
+				System.out.print("RUT del paciente internado: ");
+				String rut = scanner.nextLine();
 
-    	        Area area = areas.get(i);
+				// SIA-5: Uso de sobrecarga buscarCama(String)
+				for (int i = 0; i < areas.size(); i++) {
+					Area area = areas.get(i);
+					temp = area.buscarCama(rut);
+					if (temp != null) {
+						areaEncontrada = area;
+						break;
+					}
+				}
 
-    	        Cama temp = area.buscarCama(idCama);
+			} else {
+				System.out.println("Opcion no valida.");
+				return;
+			}
 
-    	        if (temp != null) {
+			if (temp != null) {
+				System.out.println("===== CAMA ENCONTRADA =====");
+				System.out.println("ID: " + temp.getIdCama());
+				System.out.println("Categoria: " + temp.getCategoriaCama());
+				System.out.println("Area a la que pertenece: " + areaEncontrada.getNombre());
 
-    	            System.out.println("ID: " + temp.getIdCama());
-    	            System.out.println("Categoría: " + temp.getCategoriaCama());
-    	            System.out.println("Disponibilidad: " + temp.getDisponibilidad());
+				if (temp.isOcupada()) {
+					System.out.println("Estado: Ocupada");
+				} else {
+					System.out.println("Estado: Disponible");
+				}
 
-    	            return;
-    	        }
-    	    }
-
-    	    System.out.println("No existe una cama con ID " + idCama);
-    	}
+				if (temp.getPacienteActual() != null) {
+					Paciente p = temp.getPacienteActual();
+					System.out.println("Paciente: " + p.getNombre() + " (RUT: " + p.getRut() + ")");
+					System.out.println("Gravedad: " + p.getGravedad());
+				} else {
+					System.out.println("Paciente: sin paciente");
+				}
+			} else {
+				System.out.println("No se encontro ninguna cama");
+			}
+	    }
        
        
        public static void modificarCama(Hospital hospital, Scanner scanner) {
