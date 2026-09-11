@@ -73,6 +73,14 @@ public class Hospital {
 		return new ArrayList<>(areas.values());
 	}
 	
+	public boolean agregarPacienteSinAsignar(Paciente paciente) {
+	    if (paciente == null) {
+	        return false;
+	    }
+
+	    pacientesSinAsignar.add(paciente);
+	    return true;
+	}
 	
 	
 	
