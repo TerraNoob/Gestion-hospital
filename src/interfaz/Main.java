@@ -738,57 +738,27 @@ public class Main {
     	    String rutBuscar = scanner.nextLine();
 
     	    // Pacientes sin asignar
-    	    for (int i = 0; i < hospital.getPacientesSinAsignar().size(); i++) {
-
-    	        Paciente paciente = hospital.getPacientesSinAsignar().get(i);
-
-    	        if (rutBuscar.equals(paciente.getRut())) {
+    	    try{
+    	        Paciente paciente = hospital.buscarPaciente(rutBuscar);
 
     	        	System.out.println("===== DATOS DEL PACIENTE =====");
     	            System.out.println("Nombre: " + paciente.getNombre());
     	            System.out.println("RUT: " + paciente.getRut());
     	            System.out.println("Edad: " + paciente.getEdad());
     	            System.out.println("Gravedad: " + paciente.getGravedad());
+					if (p.getSignos() != null){
+            			System.out.println("--- Signos Vitales ---");
+            			System.out.println("Frecuencia cardiaca: " + paciente.getSignos().getFrecuenciaCardiaca() + " lpm");
+            			System.out.println("Presion Arterial: " + paciente.getSignos().getPresionArterial() + " mmHg");
+            			System.out.println("Saturacion oxigeno: " + paciente.getSignos().getSaturacion() + "%");
+            			System.out.println("Temperatura: " + paciente.getSignos().getTemperatura() + " °C");
+        			}
+        			System.out.println("------------------------------------");
 
-    	            System.out.println("Estado: Sin cama asignada");
-    	            return;
-    	        }
-    	    }
-
-    	    // Pacientes asignados
-    	    ArrayList<Area> areas = hospital.listarAreas();
-
-    	    for (int i = 0; i < areas.size(); i++) {
-
-    	        Area area = areas.get(i);
-
-    	        for (int j = 0; j < area.getCamas().size(); j++) {
-
-    	            Cama cama = area.getCamas().get(j);
-
-    	            if (cama.getPacienteActual() != null &&
-    	                rutBuscar.equals(cama.getPacienteActual().getRut())) {
-
-    	                Paciente paciente = cama.getPacienteActual();
-
-    	                System.out.println("===== DATOS DEL PACIENTE =====");
-    	                System.out.println("Nombre: " + paciente.getNombre());
-    	                System.out.println("RUT: " + paciente.getRut());
-    	                System.out.println("Edad: " + paciente.getEdad());
-    	                System.out.println("Gravedad: " + paciente.getGravedad());
-
-    	                System.out.println("Estado: En cama");
-    	                System.out.println("Cama: " + cama.getIdCama());
-    	                System.out.println("Área: " + area.getNombre());
-
-    	                return;
-    	            }
-    	        }
-    	    }
-
-    	    System.out.println("No existe un paciente con RUT " + rutBuscar);
-    	}
-       
+    		}catch(ExcepcionPacienteNoEncontrado e){
+        		System.out.println(e.getMessage());
+    		}
+	   }
        //FUNCIONES ESPECIALES
        public static void listarCamasDisponibles(Hospital hospital) {
 
