@@ -1,0 +1,6 @@
+101,Pediatría,20
+102,Urgencias,50
+103,Medicina General,60
+104,UCI,15
+105,Traumatología,40
+106,Cardiología,25

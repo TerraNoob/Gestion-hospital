@@ -1,0 +1,16 @@
+101,1,Básica,0
+101,2,Básica,1
+101,3,Incubadora,0
+101,4,Incubadora,1
+102,5,Reanimación,0
+102,6,Reanimación,1
+102,7,Intermedia,0
+102,8,Básica,1
+103,9,Básica,0
+103,10,Básica,1
+104,11,Crítica,0
+104,12,Crítica,1
+105,13,Básica,0
+105,14,Básica,1
+106,15,Intermedia,0
+106,16,Intermedia,1
