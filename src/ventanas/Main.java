@@ -7,7 +7,7 @@ import modelo.Hospital;
 import modelo.*;
 import java.util.Scanner;
 import excepciones.*;
-import gestion.GestorArchivos;
+//import gestion.GestorArchivos;
 
 public class Main {
 	
@@ -15,7 +15,7 @@ public class Main {
 
 		 Scanner scanner = new Scanner(System.in);
 		 Hospital hospital = new Hospital("Hospital SIA", "Valparaíso");
-		 GestorArchivos.cargarDatos(hospital);
+		 //GestorArchivos.cargarDatos(hospital);
 		 int opcion;
 
 		//MENÚ PRINCIPAL
@@ -44,7 +44,7 @@ public class Main {
 
 	                case 0:
 	                    System.out.println("Saliendo del sistema");
-						GestorArchivos.guardarDatos(hospital);
+						//GestorArchivos.guardarDatos(hospital);
 	                    break;
 	                    
 	                default:
