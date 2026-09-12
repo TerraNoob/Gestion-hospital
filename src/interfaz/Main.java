@@ -27,6 +27,7 @@ public class Main {
 	            System.out.print("Seleccione una opcion: ");
 
 	            opcion = scanner.nextInt();
+			 	scanner.nextLine();
 
 	            switch (opcion) {
 	                case 1:
@@ -66,6 +67,7 @@ public class Main {
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
+					scanner.nextLine();
 	    	    	
 	    	    	
 	    	    	switch (opcion) {
@@ -100,8 +102,6 @@ public class Main {
 	    	    	
 	    	    } while (opcion != 0);
     	    
-    	    
-    	    
        }
        
        //MENÚ ÁREAS
@@ -118,7 +118,7 @@ public class Main {
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
-	    	    	
+					scanner.nextLine();
 	    	    	
 	    	    	switch (opcion) {
 	                case 1:
@@ -174,7 +174,7 @@ public class Main {
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
-	    	    	
+					scanner.nextLine();
 	    	    	
 	    	    	switch (opcion) {
 	                case 1:
@@ -229,7 +229,7 @@ public class Main {
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
-	    	    	
+					scanner.nextLine();
 	    	    	
 	    	    	switch (opcion) {
 	                case 1:
@@ -284,7 +284,7 @@ public class Main {
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
-	    	    	
+					scanner.nextLine();
 	    	    	
 	    	    	switch (opcion) {
 	                case 1:
@@ -292,7 +292,7 @@ public class Main {
 	                    listarCamasDisponibles(hospital);
 	                    break;
 	                case 2:
-	                    System.out.println("Listando Camas Disponibles");
+	                    System.out.println("Listando pacientes sin asignar");
 	                    listarPacientesSinAsignar(hospital, scanner);
 	                    break;
 	                case 3:
