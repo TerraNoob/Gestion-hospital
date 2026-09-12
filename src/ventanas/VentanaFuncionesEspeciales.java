@@ -1,4 +1,4 @@
-package Ventanas;
+package ventanas;
 
 import modelo.*;
 import javax.swing.*;
