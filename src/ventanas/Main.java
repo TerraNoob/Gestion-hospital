@@ -7,6 +7,7 @@ import modelo.Hospital;
 import modelo.*;
 import java.util.Scanner;
 import excepciones.*;
+import gestion.GestorArchivos;
 
 public class Main {
 	
