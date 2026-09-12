@@ -25,7 +25,11 @@ public class Hospital {
 	public void setDireccion(String d) {
 		this.direccion = d;
 	}
-	 public HashMap<Integer, Area> getAreas() {
+
+	public void setPacientesSinAsignar(ArrayList<Paciente> pacientesSinAsignar){
+		this.pacientesSinAsignar = pacientesSinAsignar;
+	}	
+	public HashMap<Integer, Area> getAreas() {
 	    return areas;
 	}
 	public String getNombre() {
