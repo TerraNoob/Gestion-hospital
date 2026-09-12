@@ -37,8 +37,7 @@ public class Main {
 
 	                case 2:
 	                    System.out.println("Ingresando por ventanas");
-	                    //menuVentanas();
-	                    //Esto para cuando haya GUI
+	                    new VentanaMenuPrincipal(hospital);
 	                    break;
 
 	                case 0:
