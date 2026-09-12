@@ -1,4 +1,4 @@
-package gestion;
+/***package gestion;
 
 import modelo.*;
 import excepciones.*;
@@ -122,3 +122,4 @@ public class GestorArchivos {
         }
     }
 }
+***/
