@@ -1,4 +1,4 @@
-/***package gestion;
+package gestion;
 
 import modelo.*;
 import excepciones.*;
@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class GestorArchivos {
 
-    private static final String RUTA_AREAS = "areas.txt";
-    private static final String RUTA_CAMAS = "camas.txt";
-    private static final String RUTA_PACIENTES = "pacientes.txt";
+    private static final String RUTA_AREAS = "src/gestion/areas.txt";
+    private static final String RUTA_CAMAS = "src/gestion/camas.txt";
+    private static final String RUTA_PACIENTES = "src/gestion/pacientes.txt";
 
     public static void guardarDatos(Hospital hospital) {
         try {
@@ -122,4 +122,3 @@ public class GestorArchivos {
         }
     }
 }
-***/
