@@ -281,8 +281,10 @@ public class Main {
 	    	    do {
 	    	    	System.out.println("========== MENÚ ==========");
 	    	    	System.out.println("1. Listar Camas Disponibles");
-	    	    	System.out.println("2. Listar Pacientes Sin Asignar");
+	    	    	System.out.println("2. Listar Pacientes en espera");
 	    	    	System.out.println("3. Asignar Cama A Paciente");
+					System.out.println("4. Reubicar Pacientes por Gravedad");
+					System.out.println("5. Automatizar Altas Medicas");
 	    	    	System.out.println("0. Salir");
 	    	    	System.out.print("Seleccione una opción: ");
 	    	    	opcion = scanner.nextInt();
@@ -295,12 +297,18 @@ public class Main {
 	                    break;
 	                case 2:
 	                    System.out.println("Listando pacientes sin asignar");
-	                    listarPacientesSinAsignar(hospital, scanner);
+	                    listarPacientesEnEspera(hospital, scanner);
 	                    break;
 	                case 3:
 	                    System.out.println("Asignando Cama");
 	                    asignarCama(hospital, scanner);
 	                    break;
+					case 4:
+						reubicarPorGravedad(hospital);
+						break;
+					case 5:
+						automatizarAltas(hospital);
+						break;
 	                case 0:
 	                	System.out.println("Saliendo");
 	                	break;
@@ -1086,7 +1094,7 @@ public class Main {
     	   System.out.println("No existe una cama con ese ID.");
       }
        
-      public static void listarPacientesSinAsignar(Hospital hospital, Scanner scanner){
+      public static void listarPacientesEnEspera(Hospital hospital, Scanner scanner){
 
 		  if (hospital.getPacientesSinAsignar().isEmpty()){
 			  System.out.println("No hay pacientes en espera");
@@ -1105,5 +1113,102 @@ public class Main {
 
     		     System.out.println("----------------------");
     		} 
+       }
+	public static void reubicarPorGravedad(Hospital hospital){
+           System.out.println("===== REUBICACION POR GRAVEDAD =====");
+           ArrayList<Area> areas = hospital.listarAreas();
+           int reubicados = 0;
+
+           for (int i = 0; i < areas.size(); i++) {
+               Area areaOrigen = areas.get(i);
+
+               if (areaOrigen.getNombre().toLowerCase().contains("uci")) {
+                   continue;
+               }
+
+               for (int j = 0; j < areaOrigen.getCamas().size(); j++) {
+                   Cama camaOrigen = areaOrigen.getCamas().get(j);
+
+                   if (camaOrigen.isOcupada() && camaOrigen.getPacienteActual() != null) {
+                       Paciente p = camaOrigen.getPacienteActual();
+
+                       if (p.getGravedad() >= 4.0f) {
+                           Cama camaDestino = null;
+                           Area areaDestino = null;
+
+                           for (int k = 0; k < areas.size(); k++) {
+                               Area a = areas.get(k);
+                               String nom = a.getNombre().toLowerCase();
+                               if (nom.contains("uci") || nom.contains("urgencia")) {
+                                   for (int m = 0; m < a.getCamas().size(); m++) {
+                                       Cama cd = a.getCamas().get(m);
+                                       if (cd.getDisponibilidad() == 1) {
+                                           camaDestino = cd;
+                                           areaDestino = a;
+                                           break;
+                                       }
+                                   }
+                               }
+                               if (camaDestino != null) {
+                                   break;
+                               }
+                           }
+
+                           if (camaDestino != null && areaDestino != null) {
+                               camaOrigen.desocuparCama();
+                               camaDestino.ocuparCama(p);
+                               p.setCamaActual(camaDestino);
+
+                               System.out.println("Paciente reubicado: " + p.getNombre() + " (RUT: " + p.getRut() + ")");
+                               System.out.println("Gravedad: " + p.getGravedad());
+                               System.out.println("Cama anterior: ID " + camaOrigen.getIdCama() + " en " + areaOrigen.getNombre());
+                               System.out.println("Nueva cama: ID " + camaDestino.getIdCama() + " en " + areaDestino.getNombre());
+                               System.out.println("------------------------------------");
+                               reubicados++;
+                           }
+                       }
+                   }
+               }
+           }
+
+           if (reubicados == 0){
+               System.out.println("No hay pacientes que requieran reubicacion o no hay camas UCI disponibles.");
+           } else {
+               System.out.println("Total de pacientes reubicados: " + reubicados);
+           }
+       }
+
+       public static void automatizarAltas(Hospital hospital){
+           System.out.println("===== AUTOMATIZACION DE ALTAS =====");
+           ArrayList<Area> areas = hospital.listarAreas();
+           int altas = 0;
+
+           for (int i = 0; i < areas.size(); i++) {
+               Area area = areas.get(i);
+               for (int j = 0; j < area.getCamas().size(); j++) {
+                   Cama c = area.getCamas().get(j);
+
+                   if (c.isOcupada() && c.getPacienteActual() != null) {
+                       Paciente p = c.getPacienteActual();
+
+                       if (p.getGravedad() <= 1.0f) {
+                           c.desocuparCama();
+                           p.setCamaActual(null);
+
+                           System.out.println("Alta otorgada: " + p.getNombre() + " (RUT: " + p.getRut() + ")");
+                           System.out.println("Gravedad: " + p.getGravedad());
+                           System.out.println("Cama liberada: ID " + c.getIdCama() + " en " + area.getNombre());
+                           System.out.println("------------------------------------");
+                           altas++;
+                       }
+                   }
+               }
+           }
+
+           if (altas == 0){
+               System.out.println("No hay pacientes con condicion de alta.");
+           }else{
+               System.out.println("Total de camas liberadas por alta medica: " + altas);
+           }
        }
 }
