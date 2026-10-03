@@ -30,7 +30,7 @@ La relación principal del sistema es que un área médica contiene varias camas
 
 ## Herramientas utilizadas
 
-JDK 8 · Eclipse IDE
+JDK1.8.0_202 · Eclipse IDE
 
 ---
 
