@@ -36,6 +36,7 @@ JDK 8 · Eclipse IDE
 
 ## INSTRUCCIONES DE INSTALACION Y USO
 
+
 ### Cómo abrir el proyecto
 
 1. Extraer el ZIP en una carpeta de tu computador.
@@ -49,3 +50,5 @@ JDK 8 · Eclipse IDE
 
 1. Seleccionar `Run As` > `Java Application`.
 2. Interactua con el sistema mediante la pestaña `Console` en la parte inferior de Eclipse, ahí podrás elegir si utilizarlo vía consola/ventana.
+
+### El informe se encuentra en la ruta "Gestion-hospital-main\src\docs\REPORTE PROYECTO.pdf"
